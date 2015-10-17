@@ -1,0 +1,36 @@
+package org.paradiso.cygnus.iterator.model;
+
+message Term {
+  enum Locality { // Locality name (e.g. "R", "CQ", "VAL")
+    R = 0;
+    CF = 1;
+    CQ = 2;
+    CV = 3;
+    TS = 4;
+    VAL = 5;
+  }
+
+  enum DataFormat { // How to parse it
+    char = 0;
+    short = 1;
+    int = 2;
+    long = 3;
+    double = 4;
+    ip = 5;
+    string = 6;
+  }
+
+  required string name = 1; // Term name
+  required Locality locality = 2; // Locality enumeration
+  required string dataformat = 3; // Data format as string
+  required uint32 location = 4; // Location of term in locality field
+  required uint32 localitySize = 5; //Total Number of a terms in locality field
+  optional string prefix = 6; // Unique number to different multiple
+  optional uint32 offset = 7; // Beginning byte offset
+  optional uint32 length = 8; // Length of the field
+}
+
+message Schema {
+  required string termType = 1;
+  repeated Term dataTerms = 2;
+}

@@ -1,0 +1,25 @@
+package cygnus;
+
+message Term {
+  enum Locality { // Locality name (e.g. "R", "CQ", "VAL")
+    R = 0;
+    CF = 1;
+    CQ = 2;
+    CV = 3;
+    TS = 4;
+    VAL = 5;
+  }
+
+  required string name = 1; // Term name
+  required Locality locality = 2; // Locality enumeration
+  required uint32 location = 3; // Location of term in locality field
+  required uint32 schema = 4; // Unique number to different multiple
+                              // schemas (i.e. two different "R" values)
+  optional uint32 offset = 5; // Beginning byte offset
+  optional uint32 length = 6; // Length of the field
+}
+
+message Schema {
+  required string termType = 1;
+  repeated Term term = 2;
+}
